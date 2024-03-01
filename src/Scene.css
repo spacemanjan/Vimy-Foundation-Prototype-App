@@ -1,0 +1,70 @@
+.scene{
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Adjust height as needed */
+}
+
+.scene::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle, rgba(0,0,0,0.1), rgb(0, 0, 0, 1));
+  pointer-events: none; /* Allows clicks to go through the overlay */
+  z-index: 2
+}
+
+.scene img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the background image covers the entire container */
+  }
+
+  .hotspot {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background-color: rgba(0, 0, 0, 0.706); /* Adjust color as needed */
+    border-radius: 50%; /* Make the hotspot circular */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+  }
+  
+  /* Example hotspot positions */
+  .hotspot.camera {
+    left: 800px;
+    top: 200px;
+  }
+  
+  .hotspot.wardrobe {
+    left: 300px;
+    top: 150px;
+  }
+
+  .back-button {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 3;
+  }
+  
+  .back-button img {
+    width: 60px; /* Adjust the size of the arrow icon */
+    height: auto;
+    fill: #ffffff; /* Color of the arrow icon */
+    filter: invert(100%);
+  }
+  
+  .back-button:hover img {
+    fill: #949494; /* Color of the arrow icon on hover */
+  }
