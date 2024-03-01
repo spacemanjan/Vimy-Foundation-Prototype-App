@@ -6,7 +6,7 @@ const DraggableContainer = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   useEffect(() => {
     // Set the draggable container's initial position
-    setPosition({ x: 10, y: 10 });
+    setPosition({ x: 0, y: 0 });
 }, []); // Run only once on component mount
 
   const [dragging, setDragging] = useState(false);
@@ -195,19 +195,10 @@ const getSubTextForIndex = (index) => {
         </div>
       ))}
 
-
-        {/* Row of buttons at the bottom */}
-    <div className="button-row">
-        <button onClick={() => handleDotClick(0)}>Button 1</button>
-        <button onClick={() => handleDotClick(1)}>Button 2</button>
-        {/* Add more buttons as needed */}
-    </div>
-
-
       {/* Row of dots */}
         <div className="dot-row">
-            <div className={`dot ${0 === activeElementIndex ? 'active' : ''}`} onClick={() => handleDotClick(286, 305)} />
-            <div className={`dot ${1 === activeElementIndex ? 'active' : ''}`} onClick={() => handleDotClick(-722, -353)} />
+            <div className={`dot ${0 === activeElementIndex ? 'active' : ''}`} onClick={() => handleDotClick(139, -355)} />
+            <div className={`dot ${1 === activeElementIndex ? 'active' : ''}`} onClick={() => handleDotClick(-828, -1037)} />
             {/* Add more dots as needed */}
         </div>
     </div>
