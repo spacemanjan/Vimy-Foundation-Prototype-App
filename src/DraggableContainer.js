@@ -1,15 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import InstructionsOverlay from './InstructionsOverlay';
 import './DraggableContainer.css';
 
 const DraggableContainer = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  useEffect(() => {
-    // Set the draggable container's initial position
-    setPosition({ x: 0, y: 0 });
-}, []); // Run only once on component mount
-
-  const [dragging, setDragging] = useState(false);
   const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
   const [elementPositions, setElementPositions] = useState([
     { x: 1200, y: 1200, image: 'office_1.png'}, // Office position
@@ -17,17 +12,19 @@ const DraggableContainer = () => {
     { x: 1500, y: 500, image: 'photo_studio.png'},  // photo studio initial positions
     { x: -200, y: -500, image: 'windsor.png'}, // windsor station initial positions
     { x: 1000, y: 100, image: 'grocery.png'}  // Grocery initial positions
-
   ]);
-
   const [dustPositions, setDustPositions] = useState([]);
-
   const [activeElementIndex, setActiveElementIndex] = useState(0);
-  
+  const [showInstructions, setShowInstructions] = useState(false);
+  const [dragging, setDragging] = useState(false);
   const containerRef = useRef(null);
-
-// Navigating from element to scene
+  // Navigating from element to scene
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Set the draggable container's initial position
+    setPosition({ x: 0, y: 0 });
+  }, []); // Run only once on component mount
 
   const handleNavigateToNewScene = () => {
     navigate("/new-scene");
@@ -70,12 +67,29 @@ const DraggableContainer = () => {
 //     return lockIn; // Return lockIn variable
 //   }
 
+  useEffect(() => {
+    // Check if instructions have been shown previously
+    const instructionsShown = localStorage.getItem('instructionsShown');
+    // If instructions haven't been shown before, set showInstructions to true
+    if (!instructionsShown) {
+      setShowInstructions(true);
+      // Set a flag in local storage to indicate that instructions have been shown
+      localStorage.setItem('instructionsShown', 'true');
+    }
+  }, []); // Run only once on component mount
+
+  const handleCloseInstructions = () => {
+    setShowInstructions(false);
+  };
+
   const handleMouseDown = (e) => {
-    setDragging(true);
-    setStartPosition({
-      x: e.clientX - position.x,
-      y: e.clientY - position.y
-    });
+    if (!showInstructions) {
+      setDragging(true);
+      setStartPosition({
+        x: e.clientX - position.x,
+        y: e.clientY - position.y
+      });
+    }
   };
 
   const handleMouseMove = (e) => {
@@ -101,25 +115,27 @@ const DraggableContainer = () => {
     //   }
     
     //   if (lockIn) return; // Stop movement if still out of bounds
-    
-    const newPosition = {
-      x: e.clientX - startPosition.x,
-      y: e.clientY - startPosition.y
-    };
+    if (!showInstructions && dragging) {
+      const newPosition = {
+        x: e.clientX - startPosition.x,
+        y: e.clientY - startPosition.y
+      };
+      setPosition(newPosition);
 
-
-    setPosition(newPosition);
-    // Update element positions
-    const updatedElementPositions = elementPositions.map(pos => ({
-      x: pos.x + newPosition.x - position.x,
-      y: pos.y + newPosition.y - position.y,
-      image: pos.image
-    }));
-    setElementPositions(updatedElementPositions);
+      // Update element positions
+      const updatedElementPositions = elementPositions.map(pos => ({
+        x: pos.x + newPosition.x - position.x,
+        y: pos.y + newPosition.y - position.y,
+        image: pos.image
+      }));
+      setElementPositions(updatedElementPositions);
+    }
   };
 
   const handleMouseUp = () => {
-    setDragging(false);
+    if (!showInstructions) {
+      setDragging(false);
+    }
   };
 
 const handleDotClick = (index,x,y) => {
@@ -178,6 +194,12 @@ const getSubTextForIndex = (index) => {
       {/* <div className="position-text">
         Dragged Image Position: {position.x}, {position.y}
       </div> */}
+      
+      
+      {/* Render the instructions overlay if showInstructions is true */}
+      {showInstructions && <InstructionsOverlay onClose={handleCloseInstructions} />}
+      
+      
       <div className='group-dust'>
         {/* Render dust particles */}
         {dustPositions.map((pos, index) => (
@@ -224,7 +246,3 @@ const getSubTextForIndex = (index) => {
 };
 
 export default DraggableContainer;
-
-
-
-
