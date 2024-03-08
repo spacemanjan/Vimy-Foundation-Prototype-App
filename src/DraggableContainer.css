@@ -5,11 +5,11 @@ html, body {
   }
 
 .draggable-container {
-    width: 200vw; /* 200% of viewport width */
-    height: 200vh; /* 200% of viewport height */
+    width: 100vw; /* 200% of viewport width */
+    height: 100vh; /* 200% of viewport height */
     /* background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e8/1920_Bacon_Pocket_Map_of_London%2C_England_and_Environs_-_Geographicus_-_London-bacon-1920.jpg'); */
     background-image: url('./map1.png');
-    background-size: cover;
+    background-size: 150%;
     background-position: 0px, 0px;
     position: relative;
     cursor: grab;
@@ -32,6 +32,7 @@ html, body {
     top:25%;
     font-size:100px;
     font-weight: 700;
+    line-height: 100px;
     color:#ffffff;
     opacity: 0; /* Initially hide the text */
     transition: opacity 1.5s ease-in-out; /* Add transition for smooth animation */
@@ -95,8 +96,8 @@ html, body {
   .dot-row {
     position:fixed;
     display:flex;
-    bottom:20px;
-    right:50%;
+    bottom:40px;
+    right:40%;
     margin-top: 20px;
     z-index: 101
   }
@@ -108,14 +109,19 @@ html, body {
   .dot {
     width: 10px;
     height: 10px;
-    background-color: #ffffff;
+    background-color: #ffffff52;
     border-radius: 50%;
     margin: 0 5px;
     cursor: pointer;
   }
-  
   .dot.active {
-    background-color: #ff0000 !important; /* Change color of active dot */
+    background-color: #d3ad76 !important; /* Change color of active dot */
+  }
+  .dash {
+    margin: 5px 0px;
+    width: 50px;
+    height: 1px;
+    background-color: #ffffff9c;
   }
 
   .draggable-element img {

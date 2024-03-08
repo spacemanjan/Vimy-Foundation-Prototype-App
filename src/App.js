@@ -7,55 +7,57 @@ import NewScene from './NewScene';
 import SideMenu from './SideMenu';
 import NavigationBar from './NavigationBar';
 import AccHome from './AccHome';
+import AccScene1 from './AccScene1';
+import TitleScreen from './TitleScreen';
+import FullScreenVideo from './FullScreenVideo';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
-  const [isOverflowVisible, setIsOverflowVisible] = useState(true);
-
-  const toggleSideMenu = () => {
-    setIsSideMenuOpen(!isSideMenuOpen);
-  };
-
+  
   useEffect(() => {
     // Simulate loading state
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 5000);
   }, []);
+  const toggleSideMenu = () => {
+    setIsSideMenuOpen(!isSideMenuOpen);
+  };
 
-  useEffect(() => {
-    document.body.style.overflow = isOverflowVisible ? 'auto' : 'hidden';
-  }, [isOverflowVisible]);
+  const handleEnterClick = () => {
+    setShowVideo(true);
+  };
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsOverflowVisible(false); // Set overflow to hidden after the delay
-    }, 2000);
-    return () => clearTimeout(timeout); // Clear the timeout on component unmount
-  }, []);
+  const handleVideoEnd = () => {
+    setShowVideo(false);
+  };
+
 
   return (
     <Router>
-    <>
-      {isLoading ? (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-              <Loading type={'spin'} color={'blue'} height={'100px'} width={'100px'} /> 
-            </div>
-          ) : (
-              <div className="App">
-                <NavigationBar toggleSideMenu={toggleSideMenu} />
-                  {isSideMenuOpen && <SideMenu isOpen={isSideMenuOpen} toggleMenu={toggleSideMenu} />}
-                <Routes>
-                  <Route path="/" element={<DraggableContainer />} />
-                  <Route path="/new-scene" element={<NewScene />} />
-                  <Route path="/accHome" element={<AccHome />} isOverflowVisible={isOverflowVisible} />
-                </Routes>
-              </div>
-           )}
-    </>
+      <>
+        {isLoading ? (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <Loading type={'spin'} color={'blue'} height={'100px'} width={'100px'} /> 
+          </div>
+        ) : (
+          <div className="App">
+            <NavigationBar toggleSideMenu={toggleSideMenu} />
+              {isSideMenuOpen && <SideMenu isOpen={isSideMenuOpen} toggleMenu={toggleSideMenu} />}
+            <Routes>
+              <Route path="/" element={<TitleScreen onEnter={handleEnterClick} />} />
+              {showVideo && <Route path="/video" element={<FullScreenVideo onVideoEnd={handleVideoEnd} />} />}
+              <Route path="/map" element={<DraggableContainer />} />
+              <Route path="/new-scene" element={<NewScene />} />
+              <Route path="/accHome" element={<AccHome/>} />
+              <Route path='/photoStudioRead' element={<AccScene1/>} />
+            </Routes>
+          </div>
+        )}
+      </>
     </Router>
   );
 }

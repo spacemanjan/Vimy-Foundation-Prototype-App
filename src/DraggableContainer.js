@@ -12,8 +12,12 @@ const DraggableContainer = () => {
   const [dragging, setDragging] = useState(false);
   const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
   const [elementPositions, setElementPositions] = useState([
-    { x: 1200, y: 1200, image: 'office_1.png'}, // Example initial positions
-    { x: 200, y: 500, image: 'home_2.png'}  // Example initial positions
+    { x: 1200, y: 1200, image: 'office_1.png'}, // Office position
+    { x: 200, y: 500, image: 'home_2.png'},  // Home initial positions
+    { x: 1500, y: 500, image: 'photo_studio.png'},  // photo studio initial positions
+    { x: -200, y: -500, image: 'windsor.png'}, // windsor station initial positions
+    { x: 1000, y: 100, image: 'grocery.png'}  // Grocery initial positions
+
   ]);
 
   const [dustPositions, setDustPositions] = useState([]);
@@ -118,7 +122,9 @@ const DraggableContainer = () => {
     setDragging(false);
   };
 
-const handleDotClick = (x,y) => {
+const handleDotClick = (index,x,y) => {
+   // Update the active element index
+   setActiveElementIndex(index);
     // Calculate the new positions of the elements relative to the new container position
     const updatedElementPositions = elementPositions.map(pos => ({
         x: pos.x - position.x + x,
@@ -136,6 +142,9 @@ const getTextForIndex = (index) => {
     const textValues = [
         'Office',
         'Home',
+        'Photo Studio',
+        'Windsor Station',
+        'Grocery'
         // Add more text values as needed
     ];
 
@@ -165,21 +174,23 @@ const getSubTextForIndex = (index) => {
       onMouseUp={handleMouseUp}
     >
         
-      <div className="position-text">
+      {/* DEBUGGING POSITION INFORMATION */}
+      {/* <div className="position-text">
         Dragged Image Position: {position.x}, {position.y}
+      </div> */}
+      <div className='group-dust'>
+        {/* Render dust particles */}
+        {dustPositions.map((pos, index) => (
+          <div
+            key={index}
+            className="dust-particle"
+            style={{
+              left: pos.x - position.x * 0.2, // Adjust the speed of dust particles as needed
+              top: pos.y - position.y * 0.2 // Adjust the speed of dust particles as needed
+            }}
+          />
+        ))}
       </div>
-
-      {/* Render dust particles */}
-      {dustPositions.map((pos, index) => (
-        <div
-          key={index}
-          className="dust-particle"
-          style={{
-            left: pos.x - position.x * 0.2, // Adjust the speed of dust particles as needed
-            top: pos.y - position.y * 0.2 // Adjust the speed of dust particles as needed
-          }}
-        />
-      ))}
 
       {/* Render draggable elements */}
       {elementPositions.map((pos, index) => (
@@ -197,8 +208,15 @@ const getSubTextForIndex = (index) => {
 
       {/* Row of dots */}
         <div className="dot-row">
-            <div className={`dot ${0 === activeElementIndex ? 'active' : ''}`} onClick={() => handleDotClick(139, -355)} />
-            <div className={`dot ${1 === activeElementIndex ? 'active' : ''}`} onClick={() => handleDotClick(-828, -1037)} />
+            <div className={`dot ${0 === activeElementIndex ? 'active' : ''}`} onClick={() => handleDotClick(0, 139, -355)} />
+            <div className='dash'></div>
+            <div className={`dot ${1 === activeElementIndex ? 'active' : ''}`} onClick={() => handleDotClick(1, -828, -1037)} />
+            <div className='dash'></div>
+            <div className={`dot ${2 === activeElementIndex ? 'active' : ''}`} onClick={() => handleDotClick(2, -636, 60)} />
+            <div className='dash'></div>
+            <div className={`dot ${3 === activeElementIndex ? 'active' : ''}`} onClick={() => handleDotClick(3, 498, 645)} />
+            <div className='dash'></div>
+            <div className={`dot ${4 === activeElementIndex ? 'active' : ''}`} onClick={() => handleDotClick(4, -1150, -344)} />
             {/* Add more dots as needed */}
         </div>
     </div>

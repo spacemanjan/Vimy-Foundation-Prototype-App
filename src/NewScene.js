@@ -15,7 +15,7 @@ const NewScene = () => {
     const navigate = useNavigate(); // Get the navigate function from React Router
 
     const handleBackButtonClick = () => {
-        navigate('/'); // Navigate back to the home page
+        navigate('/map'); // Navigate back to the home page
     };
 
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);

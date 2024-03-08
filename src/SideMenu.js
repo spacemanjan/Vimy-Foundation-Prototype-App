@@ -11,7 +11,7 @@ const SideMenu = ({ isOpen, toggleMenu }) => {
       <div className={`side-menu ${isOpen ? 'open' : ''}`}>
         <button className="navX" onClick={handleCloseButtonClick}>X</button>
         <ul>
-          <li><Link to="/">Home</Link></li>
+          <li><Link to="/map">Map Page</Link></li>
           <li>About</li>
           <li><Link to="/accHome">Accesibility</Link></li>
         </ul>

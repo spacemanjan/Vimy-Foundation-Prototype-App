@@ -1,13 +1,21 @@
+
+
 body, h1, h2, p, ul {
+    overflow: auto;
     margin: 0;
     padding: 0;
 }
 
 /* Basic styling */
 body {
+    overflow:visible;
     font-family: Arial, sans-serif;
     line-height: 1.6;
     background-color: black;
+}
+
+html, body {
+    overflow:visible;
 }
 
 header {
