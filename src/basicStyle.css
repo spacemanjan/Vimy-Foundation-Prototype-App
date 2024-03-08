@@ -30,6 +30,13 @@ header {
     position: fixed;
 }
 
+.navRight{
+    display: flex;
+    width: 150px;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .logo a {
     color: #fff;
     text-decoration: none;
@@ -296,4 +303,10 @@ footer {
 .navX{
     font-size:10px;
     margin-right:80%;
+}
+
+.infoBtn{
+    background-color: #00000000;
+    width:40px;
+    filter:invert();
 }

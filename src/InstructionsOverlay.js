@@ -28,8 +28,8 @@ const InstructionsOverlay = ({ onClose }) => {
         )}
         {step === 2 && (
           <div className="instructions-center">
-            <h2>Step 2: Navigate to Different Scenes</h2>
-            <p>Click on the elements to navigate to different scenes.</p>
+            <h2>Navigate to Different Scenes</h2>
+            <p>Click on the locations to dive into them.</p>
             <img src="click.png" alt="Navigate Icon" />
           </div>
         )}

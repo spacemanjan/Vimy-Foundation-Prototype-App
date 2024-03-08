@@ -10,11 +10,13 @@ import AccHome from './AccHome';
 import AccScene1 from './AccScene1';
 import TitleScreen from './TitleScreen';
 import FullScreenVideo from './FullScreenVideo';
+import InstructionsOverlay from './InstructionsOverlay';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
 
   
   useEffect(() => {
@@ -23,8 +25,13 @@ const App = () => {
       setIsLoading(false);
     }, 5000);
   }, []);
+
   const toggleSideMenu = () => {
     setIsSideMenuOpen(!isSideMenuOpen);
+  };
+
+  const toggleInstructions = () => {
+    setShowInstructions(!showInstructions); 
   };
 
   const handleEnterClick = () => {
@@ -45,8 +52,8 @@ const App = () => {
           </div>
         ) : (
           <div className="App">
-            <NavigationBar toggleSideMenu={toggleSideMenu} />
-              {isSideMenuOpen && <SideMenu isOpen={isSideMenuOpen} toggleMenu={toggleSideMenu} />}
+            <NavigationBar toggleSideMenu={toggleSideMenu} toggleInstructions={toggleInstructions} />
+              {isSideMenuOpen && <SideMenu isOpen={isSideMenuOpen} toggleMenu={toggleSideMenu}/>}
             <Routes>
               <Route path="/" element={<TitleScreen onEnter={handleEnterClick} />} />
               {showVideo && <Route path="/video" element={<FullScreenVideo onVideoEnd={handleVideoEnd} />} />}
@@ -55,6 +62,7 @@ const App = () => {
               <Route path="/accHome" element={<AccHome/>} />
               <Route path='/photoStudioRead' element={<AccScene1/>} />
             </Routes>
+            {showInstructions && <InstructionsOverlay onClose={toggleInstructions} />}
           </div>
         )}
       </>
