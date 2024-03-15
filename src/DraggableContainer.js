@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import InstructionsOverlay from './InstructionsOverlay';
 import './DraggableContainer.css';
 
-const DraggableContainer = () => {
+const DraggableContainer = ({ setCurrentRoute }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
   const [elementPositions, setElementPositions] = useState([
@@ -29,6 +29,10 @@ const DraggableContainer = () => {
   const handleNavigateToNewScene = () => {
     navigate("/new-scene");
   };
+
+  useEffect(() => {
+    setCurrentRoute('/map');
+  }, []);
 
   // Function to generate random positions for dust particles
   const generateRandomPositions = () => {

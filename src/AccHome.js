@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './basicStyle.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const AccHome = () => {
+const AccHome = ({ setCurrentRoute }) => {
     const [isMounted, setIsMounted] = useState(false);
     const location = useLocation();
     const navigate = useNavigate(); // Initialize the navigate function
@@ -13,6 +13,10 @@ const AccHome = () => {
         setIsMounted(false);
       };
     }, []);
+
+    useEffect(() => {
+        setCurrentRoute('/accHome');
+      }, []);
   
     useEffect(() => {
         if (isMounted) {

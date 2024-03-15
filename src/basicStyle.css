@@ -30,6 +30,14 @@ header {
     position: fixed;
 }
 
+.acc-home-header {
+    background-color: black;
+}
+
+.reg-header{
+    background-color: #12121200 !important;
+}
+
 .navRight{
     display: flex;
     width: 150px;
@@ -124,12 +132,19 @@ footer {
     text-align: center;
     padding: 10px;
 }
-
 .banner {
     background-image: url('https://assets-global.website-files.com/6140db6eb48c255beb9b29e5/617831d26ab74c477c9f716f_CWM%2019920085-295%20WM.jpg'); /* Replace 'your-banner-image.jpg' with the path to your banner image */
     background-size: cover;
     background-position: center;
-    height: 300px; /* Adjust the height as needed */
+    height: 80vh; /* Adjust the height as needed */
+    position: relative;
+}
+
+.banner-scene1 {
+    background-image: url('https://cdn.theatlantic.com/media/img/photo/2016/11/world-war-i-in-photos-introduction/w_01-1/original.jpg'); /* Replace 'your-banner-image.jpg' with the path to your banner image */
+    background-size: cover;
+    background-position: center;
+    height: 80vh; /* Adjust the height as needed */
     position: relative;
 }
 

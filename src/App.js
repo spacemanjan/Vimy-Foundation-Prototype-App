@@ -17,7 +17,7 @@ const App = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
-
+  const [currentRoute, setCurrentRoute] = useState('/');
   
   useEffect(() => {
     // Simulate loading state
@@ -36,12 +36,8 @@ const App = () => {
 
   const handleEnterClick = () => {
     setShowVideo(true);
+    console.log("Enter Button Clicked")
   };
-
-  const handleVideoEnd = () => {
-    setShowVideo(false);
-  };
-
 
   return (
     <Router>
@@ -52,15 +48,15 @@ const App = () => {
           </div>
         ) : (
           <div className="App">
-            <NavigationBar toggleSideMenu={toggleSideMenu} toggleInstructions={toggleInstructions} />
+            <NavigationBar toggleSideMenu={toggleSideMenu} toggleInstructions={toggleInstructions} currentRoute={currentRoute} />
               {isSideMenuOpen && <SideMenu isOpen={isSideMenuOpen} toggleMenu={toggleSideMenu}/>}
             <Routes>
-              <Route path="/" element={<TitleScreen onEnter={handleEnterClick} />} />
-              {showVideo && <Route path="/video" element={<FullScreenVideo onVideoEnd={handleVideoEnd} />} />}
-              <Route path="/map" element={<DraggableContainer />} />
-              <Route path="/new-scene" element={<NewScene />} />
-              <Route path="/accHome" element={<AccHome/>} />
-              <Route path='/photoStudioRead' element={<AccScene1/>} />
+              <Route path="/" element={<TitleScreen onEnter={handleEnterClick} setCurrentRoute={setCurrentRoute}/>} />
+              {showVideo && <Route path="/video" element={<FullScreenVideo/>} />}
+              <Route path="/map" element={<DraggableContainer setCurrentRoute={setCurrentRoute}/>} />
+              <Route path="/new-scene" element={<NewScene setCurrentRoute={setCurrentRoute}/>} />
+              <Route path="/accHome" element={<AccHome setCurrentRoute={setCurrentRoute}/>} />
+              <Route path='/photoStudioRead' element={<AccScene1 setCurrentRoute={setCurrentRoute}/>} />
             </Routes>
             {showInstructions && <InstructionsOverlay onClose={toggleInstructions} />}
           </div>

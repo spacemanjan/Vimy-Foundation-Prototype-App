@@ -3,7 +3,7 @@ import React from 'react';
 const AccScene1 = () => {
   return (
     <div>
-        <div class="banner">
+        <div class="banner-scene1">
             <div class="banner-content">
                 <h2>Enlisting: The first steps</h2>
                 <p>A remeberance of the effects of WW1 on Canada's social fabric</p>

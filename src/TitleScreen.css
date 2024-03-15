@@ -5,15 +5,46 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-color: rgb(180, 141, 89);
+  }
+
+  .title-screen::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: -100;
+    width: 120vw;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(0,0,0,0.1), rgb(0, 0, 0, 1));
+    pointer-events: none; /* Allows clicks to go through the overlay */
+    z-index: 2
   }
   
   .title {
     font-size: 300px;
     font-family: serif;
-    color:white;
+    color:rgb(237, 216, 162);
   }
   
   .enter-button {
-    margin-top: 20px;
-    font-size: 24px;
-  }
+      padding: 25px 30px;
+      background-color: rgb(180, 141, 89);
+      color: #5d4403;
+      font-weight: bold;
+      font-size:20px;
+      border: none;
+      border-radius: 100px;
+      letter-spacing: 4px;
+      overflow: hidden;
+      transition: 0.5s;
+      cursor: pointer;
+    }
+    
+    .enter-button:hover{
+        background: #ffffff;
+        color: rgb(180, 141, 89);
+        box-shadow: 0 0 5px #ffffff,
+                    0 0 25px #ffffff,
+                    0 0 50px #ffffff,
+                    0 0 200px #ffffff;
+    }

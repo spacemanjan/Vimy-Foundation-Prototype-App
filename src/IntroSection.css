@@ -1,0 +1,17 @@
+.fade-in-out {
+    animation: fadeInOut 10s ease-in-out infinite;
+    color:white;
+  }
+  
+  @keyframes fadeInOut {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+.intro-text{
+    z-index:99999999;
+}
